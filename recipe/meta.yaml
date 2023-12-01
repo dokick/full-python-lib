@@ -1,0 +1,52 @@
+{% set pyproject = load_file_data("../pyproject.toml", from_recipe_dir=true) %}
+{% set project = pyproject["project"] %}
+{% set name = project["name"] %}
+{% set version = project["version"] %}
+{% set urls = project["urls"] %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ..
+
+build:
+  noarch: python  # if python version isn't important
+  # string: {{ GIT_FULL_HASH }}
+  number: 0
+  script: {{ PYTHON }} -m build .  # -vv --no-deps --ignore-installed
+  entry_points:
+    - hello-world = single_file:main
+
+requirements:
+  build:
+    - python
+    - python-build
+    - setuptools >=61
+    - wheel
+  run:
+    - attrs
+    - python
+
+test:
+  requires:
+    - isort
+    - pylint
+    - tox-conda
+  commands:
+    - hello-world
+    - isort . -c
+    - pylint src
+    - tox -rv
+  imports:
+    - single_file
+    - multi_file_pkg
+
+about:
+  home: {{ urls["homepage"] }}
+  license: MIT
+  summary: "Small summary"
+  description: {{ project["description"] }}
+  dev_url: {{ urls["repository"] }}
+  doc_url: {{ urls["documentation"] }}

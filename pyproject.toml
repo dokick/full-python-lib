@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "full-python-lib"
+version = "0.0.1"
+description = "Small project"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.8"
+license = { file = "LICENSE"}
+keywords = ["your", "own", "keywords", "example", "sample"]
+authors = [
+    { name = "Dogukan Mertoglu", email = "dogukan.mertoglu01@gmail.com"}
+]
+maintainers = [
+    { name = "Dogukan Mertoglu", email = "dogukan.mertoglu01@gmail.com" }
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Typing :: Typed"
+]
+dependencies = [
+    "attrs"
+]
+
+[project.scripts]
+single-file = "single_file:main"
+
+[project.urls]
+homepage = "https://my-organization.org"
+documentation = "https://my-organization.org/docs"
+repository = "https://github.com/dokick/full-python-lib"
+
+[project.optional-dependencies]
+dev = [
+    "isort",
+    "pylint>=3",
+    "pytest"
+]
+
+[tool.setuptools]
+py-modules = ["single_file"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# no build config at this point
+
+[tool.isort]
+verbose = true
+
+[tool.pylint.main]
+fail-on = "F, E, W"
+fail-under = 8
+
+[tool.pylint.format]
+max-line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests"
+]
