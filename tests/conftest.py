@@ -1,3 +1,5 @@
+"""Adding ./src/ directory to the python path so pytest finds the packages"""
+
 import os.path
 import sys
 
