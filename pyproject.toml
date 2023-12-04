@@ -41,9 +41,10 @@ repository = "https://github.com/dokick/full-python-lib"
 
 [project.optional-dependencies]
 dev = [
-    "isort",
-    "pylint>=3",
-    "pytest",
+    "coverage >=7",
+    "isort >=5",
+    "pylint >=3",
+    "pytest >=7",
     "tox-conda"
 ]
 
@@ -54,6 +55,9 @@ py-modules = ["single_file"]
 where = ["src"]
 
 # no build config at this point
+
+[tool.coverage.report]
+omit = ["tests/*"]
 
 [tool.isort]
 verbose = true
